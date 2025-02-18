@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}
+    <title>Base</title>
+    {% endblock title %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <style>
+      main {
+        display: flex;
+        flex-direction: row;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      #edit {
+        background-color: rgb(0, 255, 255);
+        border: 3em;
+      }
+
+      #delete {
+        background-color: rgb(255, 0, 0);
+        color: rgb(255, 255, 255);
+        border: 3em;
+      }
+
+      #edit:hover {
+        background-color: aquamarine;
+      }
+
+      #delete:hover {
+        background-color: rgb(216, 3, 3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="">About</a>
+      <a href="">Contact</a>
+      <a href="/admin/">Admin</a>
+    </nav>
+
+    {% if user.is_authenticated %}
+    <strong
+      ><a href="{% url 'user-profile' request.user.id %}">@Profile</a></strong
+    >
+    <a href="{% url 'logout' %}">LogOut</a>
+
+    {% else %}
+    <a href="{% url 'login' %}">LogIn</a>
+
+    {% endif %} {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="{% url 'home' %}" method="get">
+      <input type="text" name="q" placeholder="Search Room..." />
+      <button type="submit">Search</button>
+    </form>
+
+    {% block content %} {% endblock content %}
+  </body>
+</html>

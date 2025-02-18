@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="auth-container">
+  {% if page == 'login' %}
+  
+  {% block title %}
+  <title>LogIn</title>
+  {% endblock title %}
+
+  <div class="auth-card">
+    <h1 class="auth-heading">Welcome Back</h1>
+    <p class="auth-subtext">Please sign in to continue</p>
+    
+    <form class="auth-form" method="post">
+      {% csrf_token %}
+      <input 
+        type="text" 
+        name="username" 
+        placeholder="Username"
+        class="auth-input"
+      >
+      <input 
+        type="password" 
+        name="password" 
+        placeholder="Password"
+        class="auth-input"
+      >
+      <button type="submit" class="auth-button">
+        Sign In
+      </button>
+    </form>
+    
+    <p class="auth-text">
+      No account yet? 
+      <a href="{% url 'register' %}" class="auth-link">Create account</a>
+    </p>
+  </div>
+
+  {% else %}
+
+  <div class="auth-card">
+    <h1 class="auth-heading">Create Account</h1>
+    
+    <form class="auth-form" method="post">
+      {% csrf_token %}
+      <input 
+        type="text" 
+        name="username"
+        placeholder="Choose username"
+        class="auth-input"
+      >
+      <!-- Add additional registration fields here -->
+      <button type="submit" class="auth-button">
+        Register
+      </button>
+    </form>
+    
+    <p class="auth-text">
+      Already have an account? 
+      <a href="{% url 'login' %}" class="auth-link">Sign in here</a>
+    </p>
+  </div>
+
+  {% endif %}
+</main>
+{% endblock content %}

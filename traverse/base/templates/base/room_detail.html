@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block title %}<title>{{room.name}}</title>
+{%endblock title %} {% block content %}
+
+<style>
+  .conv-head h5 {
+    padding: 0%;
+    margin: 0%;
+    padding-bottom: 2em;
+  }
+
+  .conv-head h2 {
+    padding: 0%;
+    margin: 0%;
+  }
+
+  main {
+    display: flex;
+    flex-direction: row;
+    padding: 0em;
+    font-size: larger;
+  }
+
+  section {
+    padding: 2em;
+  }
+  .topics {
+    padding-left: 0em;
+  }
+</style>
+
+<h2>{{room.name}}</h2>
+<p>{{room.description}}</p>
+
+<main>
+  <section class="topics">{% include 'base/topics_component.html' %}</section>
+  <section>
+    <div class="conversations">
+      <div class="conv-head">
+        <h2>Conversation</h2>
+        <h5>({{message_number}} messages so far)</h5>
+      </div>
+      <hr />
+
+      {% for message in room_messages %}
+      <div>
+        <small>@{{message.user}} {{message.created_at|timesince}} ago</small>
+        <p>{{message.content}}</p>
+        {% if request.user == message.user or request.user.is_superuser %}
+        <a href="{% url 'delete-message' message.id %}">Delete</a>
+        <a href="{% url 'edit-message' message.id %}">Edit</a>
+        {% endif %}
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+    <div class="write-message">
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="write message here..." />
+      </form>
+    </div>
+  </section>
+  <section class="room-members-activity">
+    <div>
+      <h3>Room members</h3>
+      <div>
+        {% for member in room_members %}
+        <p>@{{member.username}}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div>{% include 'base/activity_component.html' %}</div>
+  </section>
+</main>
+
+{% endblock content %}

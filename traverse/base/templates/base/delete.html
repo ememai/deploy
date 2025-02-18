@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+<title>Delete</title>
+
+{% endblock title %}
+
+
+{% block content %}
+
+<main>
+    <p>Are you ready to delete {{object}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <button type="button" onclick="history.back()">Go back</button>
+        <input type="submit" value="Delete">
+    </form>
+</main>
+
+{% endblock content %}

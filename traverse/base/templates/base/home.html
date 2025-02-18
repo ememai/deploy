@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Home</title>{% endblock title %} {% block content %}
+<style>
+    #room-name {
+        font-family: sans-serif;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #edit {
+        background-color: rgb(0, 255, 255);
+        border: 3em;
+    }
+
+    #delete {
+        background-color: rgb(255, 0, 0);
+        color: rgb(255, 255, 255);
+        border: 3em;
+    }
+
+    #edit:hover {
+        background-color: aquamarine;
+    }
+
+    #delete:hover {
+        background-color: rgb(216, 3, 3);
+    }
+</style>
+
+<main>
+    <div>{% include 'base/topics_component.html' %}</div>
+
+    <div class="rooms">
+        <h1>Explore rooms</h1>
+        <p>{{rooms_count}} rooms!</p>
+        <hr />
+
+        {% for room in rooms %}
+
+        <div class="room">
+            {% if user == room.host or user.is_superuser %}
+            <a id="edit" href="{% url 'update-room' room.id %}">Edit</a>
+            <a id="delete" href="{% url 'delete-room' room.id %}">Delete</a>
+            {% endif %}
+            <span>@{{room.host.username}}</span><br />
+            <a href="{% url 'room-detail' room.id %}">
+                <h3 id="room-name">{{room.name}}</h3>
+            </a><br />
+            <small>{{room.topic.name}}</small>
+            <hr />
+        </div>
+        {% endfor %}
+        <a href="{% url 'create-room' %}">Create new room</a>
+    </div>
+    <div>{% include 'base/activity_component.html' %}</div>
+</main>
+{% endblock %}
