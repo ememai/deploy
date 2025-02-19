@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Media</h1>
+    <ul>
+        {% for media in medias %}
+            <li>
+                {% if media.image %}
+                    <img src="{{ media.image.url }}" alt="{{ media.name }}" style="max-width: 200px;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+
+                {% if media.files %}
+                    <a href="{{ media.files.url }}" target="_blank">{{ media.name }}</a>
+                {% else %}
+                    <p>No file available</p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>No media found.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

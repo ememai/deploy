@@ -169,3 +169,7 @@ def files(request):
     files = MyFiles.objects.all()
     return render(request, 'base/files.html',{'files': files})
 
+
+def media(request):
+    medias = LcMedia.objects.all()
+    return render(request, 'base/media.html',{'files': files})
