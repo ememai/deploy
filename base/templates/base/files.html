@@ -4,7 +4,21 @@
     <h1>Files</h1>
     <ul>
         {% for file in files %}
-            <li><a href="{{ file.url }}">{{ file.name }}</a></li>
+            <li>
+                {% if file.image %}
+                    <img src="{{ file.image.url }}" alt="{{ file.name }}" style="max-width: 200px;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+
+                {% if file.files %}
+                    <a href="{{ file.files.url }}" target="_blank">{{ file.name }}</a>
+                {% else %}
+                    <p>No file available</p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>No files found.</p>
         {% endfor %}
     </ul>
 {% endblock %}

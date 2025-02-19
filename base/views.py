@@ -167,5 +167,5 @@ def updateMessage(request, pk):
 
 def files(request):
     files = MyFiles.objects.all()
-    return render(request, 'base/files.html')
+    return render(request, 'base/files.html',{'files': files})
 

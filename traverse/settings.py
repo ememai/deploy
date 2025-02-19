@@ -2,6 +2,11 @@ from pathlib import Path
 import os
 from decouple import config
 import dj_database_url
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # from . import asgi
 
 # BASE_DIR / 'subdir'.
@@ -31,6 +36,8 @@ INSTALLED_APPS = [
     "daphne", 
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 ASGI_APPLICATION = 'traverse.asgi.application'
@@ -108,7 +115,19 @@ USE_TZ = True
 
 # Media files settings
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET')
+)
+# CLOUDINARY_URL=cloudinary://182281811151181:3_2GhdfjX_IoSd8yS5VqiXP9nPE@dkjsuw90d
+
+# Media files
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Cloudinary URL for media files
+# MEDIA_URL = 'https://res.cloudinary.com/dkjsuw90d/'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [

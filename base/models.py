@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -40,6 +42,6 @@ class Message(models.Model):
 
 class MyFiles(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/')  # Files saved to MEDIA_ROOT/images/
-    files = models.FileField(upload_to='documents/') # Files saved to MEDIA_ROOT/documents/
+    image = CloudinaryField('image', folder='images')  # Files saved to MEDIA_ROOT/images/
+files = CloudinaryField('files', resource_type='raw', folder='documents')
     
