@@ -164,3 +164,8 @@ def updateMessage(request, pk):
     context = {'message':message, 'messageForm':messageForm}
     return render(request, 'base/edit_message.html', context)
 
+
+def files(request):
+    files = MyFiles.objects.all()
+    return render(request, 'base/files.html')
+

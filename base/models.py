@@ -38,4 +38,8 @@ class Message(models.Model):
         return self.content[:2]
     
 
+class MyFiles(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')  # Files saved to MEDIA_ROOT/images/
+    files = models.FileField(upload_to='documents/') # Files saved to MEDIA_ROOT/documents/
     
