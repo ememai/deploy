@@ -172,4 +172,7 @@ def files(request):
 
 def media(request):
     medias = LcMedia.objects.all()
-    return render(request, 'base/media.html',{'files': files})
+    context = {
+        'medias': medias
+    }
+    return render(request, 'base/media.html',context)
