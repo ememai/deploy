@@ -65,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'traverse.wsgi.application'
+WSGI_APPLICATION = 'traverse.wsgi.application'
 
 DATABASES = {
     'default': {
