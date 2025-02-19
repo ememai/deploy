@@ -115,19 +115,17 @@ USE_TZ = True
 
 # Media files settings
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# cloudinary.config(
-#     cloud_name=config('CLOUDINARY_CLOUD_NAME'),
-#     api_key=config('CLOUDINARY_API_KEY'),
-#     api_secret=config('CLOUDINARY_API_SECRET')
-# )
-# CLOUDINARY_URL=cloudinary://182281811151181:3_2GhdfjX_IoSd8yS5VqiXP9nPE@dkjsuw90d
 
-# Media files
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+cloudinary.config(
+    cloud_name="dkjsuw90d",
+    api_key="182281811151181",
+    api_secret="3_2GhdfjX_IoSd8yS5VqiXP9nPE"
+)
+
 
 # Cloudinary URL for media files
-# MEDIA_URL = 'https://res.cloudinary.com/dkjsuw90d/'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [

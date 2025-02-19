@@ -42,11 +42,11 @@ class Message(models.Model):
 
 class MyFiles(models.Model):
     name = models.CharField(max_length=100)
-    image = CloudinaryField('image', folder='images')  # Files saved to MEDIA_ROOT/images/
-    files = CloudinaryField('files', resource_type='raw', folder='documents')
+    image = CloudinaryField('image', folder='images', blank=True)  # Files saved to MEDIA_ROOT/images/
+    files = CloudinaryField('files', resource_type='raw', folder='documents', blank=True)
     
-class LcMedia(models.Model):
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images')  # Files saved to MEDIA_ROOT/images/
-    files = models.FileField(upload_to='documents')
+# class LcMedia(models.Model):
+#     name = models.CharField(max_length=100)
+#     image = models.ImageField(upload_to='images')  # Files saved to MEDIA_ROOT/images/
+#     files = models.FileField(upload_to='documents')
     

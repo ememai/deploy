@@ -14,6 +14,6 @@ urlpatterns = [
     path('logout/', views.logoutPage, name='logout'),
     path('register/', views.registerPage, name='register'),
     path('files/', views.files, name='files'),
-    path('media/', views.media, name='media'),
+    # path('media/', views.media, name='media'),
 
 ]
