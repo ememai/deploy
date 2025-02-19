@@ -1,7 +1,9 @@
 from pathlib import Path
 import os
 from decouple import config
+# from . import asgi
 
+# BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -25,9 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "daphne", 
     'django.contrib.staticfiles',
-    'base'
+    'base.apps.BaseConfig',
 ]
+
+ASGI_APPLICATION = 'traverse.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'traverse.wsgi.application'
+# WSGI_APPLICATION = 'traverse.wsgi.application'
 
 DATABASES = {
     'default': {
